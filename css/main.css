@@ -1,0 +1,80 @@
+/*
+    notes
+    vh  view port hight 
+    */
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+:root {
+  --main-color: #ff9800;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.landing-page {
+  min-height: 100vh;
+  background-image: url("../images/children-593313_1920.jpg");
+  background-size: cover;
+  position: relative;
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.header-area {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  display: flex;
+  padding: 10px;
+}
+.header-area .logo {
+  padding: 15px;
+  width: 300px;
+}
+.header-area ul {
+  list-style: none;
+  width: 100%;
+  text-align: right;
+  padding-left: 0;
+  padding-right: 10px;
+  font-size: 15px;
+}
+
+.header-area ul li {
+  display: inline-block;
+  margin-left: 10px;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+a:hover,
+.active {
+  color: var(--main-color);
+}
+.intro {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: #fff;
+}
+.intro h1 {
+  font-size: 35px;
+  margin: 0 0 12px;
+}
+.intro h1 span {
+  color: var(--main-color);
+}
+.intro p {
+  line-height: 1.6;
+  font-size: 20px;
+  margin: 0;
+}
