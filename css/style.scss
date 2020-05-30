@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 :root {
-  --main-color: #00c2e5;
+  --main-color: rgba(255, 188, 2);
 }
 body {
   font-family: "Open Sans", sans-serif;
@@ -25,23 +25,23 @@ body {
   color: #ffffff;
   display: flex;
   padding: 10px;
-}
-.header-area .logo {
-  padding: 15px;
-  width: 300px;
-}
-.header-area ul {
-  list-style: none;
-  width: 100%;
-  text-align: right;
-  padding-left: 0;
-  padding-right: 10px;
-  font-size: 15px;
-}
+  .logo {
+    padding: 15px;
+    width: 300px;
+  }
+  ul {
+    list-style: none;
+    width: 100%;
+    text-align: right;
+    padding-left: 0;
+    padding-right: 10px;
+    font-size: 15px;
+  }
 
-.header-area ul li {
-  display: inline-block;
-  margin-left: 10px;
+  ul li {
+    display: inline-block;
+    margin-left: 10px;
+  }
 }
 a {
   color: #fff;
@@ -60,16 +60,31 @@ a:hover,
   transform: translate(-50%, -50%);
   z-index: 2;
   color: #fff;
+  h1 {
+    font-size: 35px;
+    margin: 0 0 12px;
+  }
+  h1 span {
+    color: var(--main-color);
+  }
+  p {
+    line-height: 1.6;
+    font-size: 20px;
+    margin: 0;
+  }
 }
-.intro h1 {
-  font-size: 35px;
-  margin: 0 0 12px;
-}
-.intro h1 span {
-  color: var(--main-color);
-}
-.intro p {
-  line-height: 1.6;
-  font-size: 20px;
-  margin: 0;
+
+.setting-box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 150px;
+  z-index: 1000;
+  min-height: 100vh;
+  background-color: rgba(255, 188, 2, 0.6);
+  transition: 0.3s;
+  .fa {
+    position: absolute;
+    right: 0;
+  }
 }
