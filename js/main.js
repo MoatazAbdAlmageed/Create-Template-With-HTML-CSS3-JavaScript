@@ -88,7 +88,7 @@ function renderSlider() {
   btn.href = slide.btn.href;
 }
 function init() {
-  const { logo, settingBox, toggle, colorsHolder } = elements;
+  const { logo, settingBox, toggle, colorsHolder, landingPage } = elements;
   document.documentElement.style.setProperty("--main-color", colors[0]);
 
   logo.innerHTML = compoanyName;
@@ -104,7 +104,10 @@ function init() {
 
   toggle.onclick = function () {
     settingBox.classList.toggle("opened");
-    toggle.querySelector('.fa-gear').classList.toggle("fa-spin");
+    toggle.querySelector(".fa-gear").classList.toggle("fa-spin");
+  };
+  landingPage.onclick = function () {
+    settingBox.classList.remove("opened");
   };
 
   for (let index = 0; index < colors.length; index++) {
