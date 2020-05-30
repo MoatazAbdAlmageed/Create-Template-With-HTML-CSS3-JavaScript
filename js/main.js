@@ -134,6 +134,7 @@ function init() {
     fontsList.querySelectorAll("option").forEach((item) => {
       if (item.value == font) {
         item.setAttribute("selected", "selected");
+        item.setAttribute("disabled", "disabled");
       }
     });
   }
@@ -144,6 +145,7 @@ function init() {
     sizesList.querySelectorAll("option").forEach((item) => {
       if (item.value == size) {
         item.setAttribute("selected", "selected");
+        item.setAttribute("disabled", "disabled");
       }
     });
   }
@@ -182,11 +184,15 @@ function init() {
       .querySelectorAll('[selected="selected"]')
       .forEach((item) => {
         item.removeAttribute("selected", "selected");
+        item.removeAttribute("disabled", "disabled");
       });
 
     event.target
       .querySelector(`[value="${font}"]`)
       .setAttribute("selected", "selected");
+    event.target
+      .querySelector(`[value="${font}"]`)
+      .setAttribute("disabled", "disabled");
 
     document.documentElement.style.setProperty("--font-family", font);
     localStorage.setItem("selected_font", font);
@@ -201,11 +207,15 @@ function init() {
       .querySelectorAll('[selected="selected"]')
       .forEach((item) => {
         item.removeAttribute("selected", "selected");
+        item.removeAttribute("disabled", "disabled");
       });
 
     event.target
       .querySelector(`[value="${size}"]`)
       .setAttribute("selected", "selected");
+    event.target
+      .querySelector(`[value="${size}"]`)
+      .setAttribute("disabled", "disabled");
 
     document.documentElement.style.setProperty("--font-size", size);
     localStorage.setItem("selected_size", size);
