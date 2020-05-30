@@ -2,7 +2,7 @@
 $setting-box-width: 150px;
 
 :root {
-  --main-color: #ff9800;
+  --main-color: #f44336;
 }
 $main-color: var(--main-color);
 body {
@@ -30,6 +30,10 @@ body {
   .logo {
     padding: 15px;
     width: 300px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3em;
+    color: $main-color;
   }
   ul {
     list-style: none;
@@ -93,7 +97,7 @@ a:hover,
     padding: 10px;
     text-align: center;
   }
-  .pointer {
+  .toggle {
     position: absolute;
     right: 0;
     top: 250px;

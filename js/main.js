@@ -1,19 +1,5 @@
 const compoanyName = "specialCo",
   tagline = "We are a creative agency with a passion for design",
-  elements = {
-    logo: document.querySelector(".logo"),
-    landingPage: document.querySelector(".landing-page"),
-    heading: document.querySelector(".landing-page .title"),
-    parapraph: document.querySelector(".landing-page .description"),
-    btn: document.querySelector(".intro .btn"),
-    colorsHolder: document.getElementById("colors-holder"),
-
-    /**
-     * Settings
-     */
-    settingBox: document.querySelector(".setting-box"),
-    pointer: document.querySelector(".setting-box .pointer"),
-  },
   colors = [
     "#f44336",
     "#e91e63",
@@ -74,7 +60,21 @@ const compoanyName = "specialCo",
         href: "#Any",
       },
     },
-  ];
+  ],
+  elements = {
+    logo: document.querySelector(".logo"),
+    landingPage: document.querySelector(".landing-page"),
+    heading: document.querySelector(".landing-page .title"),
+    parapraph: document.querySelector(".landing-page .description"),
+    btn: document.querySelector(".intro .btn"),
+    colorsHolder: document.getElementById("colors-holder"),
+
+    /**
+     * Settings
+     */
+    settingBox: document.querySelector(".setting-box"),
+    toggle: document.querySelector(".setting-box .toggle"),
+  };
 let slide;
 let activeSlide = 0;
 
@@ -88,7 +88,9 @@ function renderSlider() {
   btn.href = slide.btn.href;
 }
 function init() {
-  const { logo, settingBox, pointer, colorsHolder } = elements;
+  const { logo, settingBox, toggle, colorsHolder } = elements;
+  document.documentElement.style.setProperty("--main-color", colors[0]);
+
   logo.innerHTML = compoanyName;
   document.title = `${compoanyName} - ${tagline}`;
   renderSlider();
@@ -100,8 +102,9 @@ function init() {
     renderSlider();
   }, 3000);
 
-  pointer.onclick = function () {
+  toggle.onclick = function () {
     settingBox.classList.toggle("opened");
+    toggle.querySelector('.fa-gear').classList.toggle("fa-spin");
   };
 
   for (let index = 0; index < colors.length; index++) {
