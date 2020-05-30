@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 $setting-box-width: 150px;
-$main-color: #ffbc01;
+
+:root {
+  --main-color: #ff9800;
+}
+$main-color: var(--main-color);
 body {
   font-family: "Open Sans", sans-serif;
 }
@@ -79,7 +83,7 @@ a:hover,
   width: $setting-box-width;
   z-index: 1000;
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: #fff;
   transition: 0.3s;
 
   &.opened {
@@ -99,5 +103,22 @@ a:hover,
     text-align: center;
     right: -30px;
     cursor: pointer;
+  }
+  #colors-holder {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      color: #ffffff;
+      border: 1px solid #fff;
+      margin: 5px;
+      width: 20px;
+      height: 20px;
+      float: left;
+      border-radius: 5px;
+      &.selected {
+        border: 1px solid #333333;
+      }
+    }
   }
 }

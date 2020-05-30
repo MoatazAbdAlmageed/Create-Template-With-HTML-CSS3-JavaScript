@@ -6,56 +6,75 @@ const compoanyName = "specialCo",
     heading: document.querySelector(".landing-page .title"),
     parapraph: document.querySelector(".landing-page .description"),
     btn: document.querySelector(".intro .btn"),
+    colorsHolder: document.getElementById("colors-holder"),
 
     /**
      * Settings
      */
     settingBox: document.querySelector(".setting-box"),
-    gear: document.querySelector(".setting-box .fa-gear"),
-  };
-
-sliders = [
-  {
-    img: "web.jpg",
-    heading: "<span>Website</span> Design",
-    parapraph:
-      "Having a unique website design is important part of the branding and marketing process of your business",
-    btn: {
-      title: "startups",
-      href: "#startups",
-    },
+    pointer: document.querySelector(".setting-box .pointer"),
   },
-  {
-    img: "wd.jpg",
-    heading: "<span>Web</span> Development",
-    parapraph:
-      "Our new fangled approach to Website Development is directed creating and building deep love for your website",
-    btn: {
-      title: "Companies",
-      href: "#Companies",
+  colors = [
+    "#f44336",
+    "#e91e63",
+    "#9c27b0",
+    "#673ab7",
+    "#3f51b5",
+    "#2196f3",
+    "#03a9f4",
+    "#00bcd4",
+    "#009688",
+    "#4caf50",
+    "#cddc39",
+    "#ffeb3b",
+    "#ff9800",
+    "#ff5722",
+    "#795548",
+    "#9e9e9e",
+    "#607d8b",
+  ],
+  sliders = [
+    {
+      img: "web.jpg",
+      heading: "<span>Website</span> Design",
+      parapraph:
+        "Having a unique website design is important part of the branding and marketing process of your business",
+      btn: {
+        title: "startups",
+        href: "#startups",
+      },
     },
-  },
-  {
-    img: "seo.jpeg",
-    heading: "<span>SEO</span> Optimization",
-    parapraph:
-      "Obtain top rankings for desired search terms and drive qualified leads that are crucial to building your business",
-    btn: {
-      title: "startups",
-      href: "#startups",
+    {
+      img: "wd.jpg",
+      heading: "<span>Web</span> Development",
+      parapraph:
+        "Our new fangled approach to Website Development is directed creating and building deep love for your website",
+      btn: {
+        title: "Companies",
+        href: "#Companies",
+      },
     },
-  },
-  {
-    img: "om.jpeg",
-    heading: "<span>Online</span> Marketing",
-    parapraph:
-      "Our specialized marketing teams work to increase your conversions, repeat traffic, and expand your online visibility",
-    btn: {
-      title: "Any",
-      href: "#Any",
+    {
+      img: "seo.jpeg",
+      heading: "<span>SEO</span> Optimization",
+      parapraph:
+        "Obtain top rankings for desired search terms and drive qualified leads that are crucial to building your business",
+      btn: {
+        title: "startups",
+        href: "#startups",
+      },
     },
-  },
-];
+    {
+      img: "om.jpeg",
+      heading: "<span>Online</span> Marketing",
+      parapraph:
+        "Our specialized marketing teams work to increase your conversions, repeat traffic, and expand your online visibility",
+      btn: {
+        title: "Any",
+        href: "#Any",
+      },
+    },
+  ];
 let slide;
 let activeSlide = 0;
 
@@ -69,7 +88,7 @@ function renderSlider() {
   btn.href = slide.btn.href;
 }
 function init() {
-  const { logo, settingBox, gear } = elements;
+  const { logo, settingBox, pointer, colorsHolder } = elements;
   logo.innerHTML = compoanyName;
   document.title = `${compoanyName} - ${tagline}`;
   renderSlider();
@@ -81,9 +100,31 @@ function init() {
     renderSlider();
   }, 3000);
 
-  gear.onclick = function () {
-    settingBox.classList.toggle("opened");
+  pointer.onclick = function () {
+    settingBox.classList.add("opened");
   };
+
+  for (let index = 0; index < colors.length; index++) {
+    var color = document.createElement("LI");
+    color.setAttribute("data-color", colors[index]);
+    color.style.backgroundColor = colors[index];
+    colorsHolder.appendChild(color);
+
+    color.addEventListener("click", function (event) {
+      var siblings = this.parentNode.childNodes;
+
+      for (let index = 0; index < siblings.length; index++) {
+        siblings[index].classList.remove("selected");
+      }
+      siblings[index].classList.add("selected");
+      document.documentElement.style.setProperty(
+        "--main-color",
+        event.target.dataset.color
+      );
+    });
+  }
+
+  colorsHolder.querySelectorAll("li")[0].classList.add("selected");
 }
 
 // *** Hide loader when everything is loaded *** //
