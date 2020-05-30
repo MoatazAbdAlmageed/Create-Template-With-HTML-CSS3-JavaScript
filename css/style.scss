@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
-
-:root {
-  --main-color: rgba(255, 188, 2);
-}
+$setting-box-width: 150px;
+$main-color: #ffbc01;
 body {
   font-family: "Open Sans", sans-serif;
 }
@@ -50,7 +48,7 @@ a {
 }
 a:hover,
 .active {
-  color: var(--main-color);
+  color: $main-color;
   font-weight: bold;
 }
 .intro {
@@ -65,7 +63,7 @@ a:hover,
     margin: 0 0 12px;
   }
   h1 span {
-    color: var(--main-color);
+    color: $main-color;
   }
   p {
     line-height: 1.6;
@@ -76,15 +74,30 @@ a:hover,
 
 .setting-box {
   position: fixed;
-  left: 0;
+  left: -$setting-box-width;
   top: 0;
-  width: 150px;
+  width: $setting-box-width;
   z-index: 1000;
   min-height: 100vh;
-  background-color: rgba(255, 188, 2, 0.6);
+  background-color: #ffffff;
   transition: 0.3s;
-  .fa {
+
+  &.opened {
+    left: 0;
+  }
+  .container {
+    padding: 10px;
+    text-align: center;
+  }
+  .pointer {
     position: absolute;
     right: 0;
+    top: 250px;
+    background-color: #fff;
+    padding: 8px 0;
+    width: 30px;
+    text-align: center;
+    right: -30px;
+    cursor: pointer;
   }
 }

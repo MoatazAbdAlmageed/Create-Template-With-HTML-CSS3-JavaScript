@@ -1,11 +1,17 @@
 const compoanyName = "specialCo",
   tagline = "We are a creative agency with a passion for design",
-  selectors = {
+  elements = {
     logo: document.querySelector(".logo"),
     landingPage: document.querySelector(".landing-page"),
     heading: document.querySelector(".landing-page .title"),
     parapraph: document.querySelector(".landing-page .description"),
     btn: document.querySelector(".intro .btn"),
+
+    /**
+     * Settings
+     */
+    settingBox: document.querySelector(".setting-box"),
+    gear: document.querySelector(".setting-box .fa-gear"),
   };
 
 sliders = [
@@ -54,15 +60,17 @@ let slide;
 let activeSlide = 0;
 
 function renderSlider() {
+  const { landingPage, heading, parapraph, btn } = elements;
   slide = sliders[activeSlide];
-  selectors.landingPage.style.backgroundImage = `url(./images/${slide.img})`;
-  selectors.heading.innerHTML = slide.heading;
-  selectors.parapraph.innerHTML = slide.parapraph;
-  selectors.btn.innerHTML = slide.btn.title;
-  selectors.btn.href = slide.btn.href;
+  landingPage.style.backgroundImage = `url(./images/${slide.img})`;
+  heading.innerHTML = slide.heading;
+  parapraph.innerHTML = slide.parapraph;
+  btn.innerHTML = slide.btn.title;
+  btn.href = slide.btn.href;
 }
 function init() {
-  selectors.logo.innerHTML = compoanyName;
+  const { logo, settingBox, gear } = elements;
+  logo.innerHTML = compoanyName;
   document.title = `${compoanyName} - ${tagline}`;
   renderSlider();
   setInterval(() => {
@@ -72,6 +80,10 @@ function init() {
     }
     renderSlider();
   }, 3000);
+
+  gear.onclick = function () {
+    settingBox.classList.toggle("opened");
+  };
 }
 
 // *** Hide loader when everything is loaded *** //
