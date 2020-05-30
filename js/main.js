@@ -55,7 +55,7 @@ let activeSlide = 0;
 
 function renderSlider() {
   slide = sliders[activeSlide];
-  selectors.landingPage.style.backgroundImage = `url(../images/${slide.img})`;
+  selectors.landingPage.style.backgroundImage = `url(./images/${slide.img})`;
   selectors.heading.innerHTML = slide.heading;
   selectors.parapraph.innerHTML = slide.parapraph;
   selectors.btn.innerHTML = slide.btn.title;
