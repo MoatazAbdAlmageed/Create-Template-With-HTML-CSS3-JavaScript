@@ -18,9 +18,30 @@
         <i class="fa fa-gear"></i>
       </div>
       <div class="container">
-        <h3>Settings</h3>
-        <p>Colors</p>
-        <ul id="colors-holder"></ul>
+        <div class="option">
+          <p>Colors</p>
+          <ul id="colors-list"></ul>
+        </div>
+
+        <div class="option">
+          <p>Background Speed</p>
+          <input
+            id="background-speed"
+            type="number"
+            min="1"
+            max="10"
+            value="5"
+          />
+        </div>
+
+        <div class="option">
+          <p>Font Family</p>
+          <select id="fonts-list">
+            <option value="Open Sans">Open Sans</option>
+            <option value="arial">Arial</option>
+            <option value="tahoma">Tahoma</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="landing-page">

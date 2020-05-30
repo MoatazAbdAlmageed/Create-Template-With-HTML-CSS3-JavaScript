@@ -1,20 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 $setting-box-width: 150px;
-
 :root {
   --main-color: #f44336;
   --dark-color: #616161;
+  --font-family: "Open Sans", sans-serif;
+  --font-size: 1em;
 }
+
 $main-color: var(--main-color);
 $dark-color: var(--dark-color);
-body {
-  font-family: "Open Sans", sans-serif;
-}
 
 .landing-page {
   min-height: 100vh;
   background-size: cover;
   position: relative;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
 }
 .overlay {
   background-color: rgba(0, 0, 0, 0.7);
@@ -69,6 +70,7 @@ a:hover,
   z-index: 2;
   color: #fff;
   text-align: center;
+  width: 80%;
   h1 {
     font-size: 35px;
     margin: 0 0 12px;
@@ -84,6 +86,8 @@ a:hover,
 }
 
 .setting-box {
+  font-family: "Open Sans", sans-serif;
+
   position: fixed;
   left: -$setting-box-width;
   top: 0;
@@ -103,7 +107,12 @@ a:hover,
     color: $dark-color;
     padding: 10px;
     text-align: center;
+    p {
+      font-size: 12px;
+      font-weight: bold;
+    }
   }
+
   .toggle {
     position: absolute;
     right: 0;
@@ -116,10 +125,16 @@ a:hover,
     cursor: pointer;
     color: $dark-color;
   }
-  #colors-holder {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+
+  .option {
+    overflow: auto;
+    background: #f3f3f3;
+    margin-bottom: 3em;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
     li {
       color: #ffffff;
       border: 1px solid #fff;
@@ -129,10 +144,16 @@ a:hover,
       float: left;
       border-radius: 5px;
       opacity: 0.5;
-      &.selected {
+      &.active {
         border: 1px solid #333333;
         opacity: 1;
       }
     }
+  }
+  .slow {
+    background: green;
+  }
+  .fast {
+    background: red;
   }
 }

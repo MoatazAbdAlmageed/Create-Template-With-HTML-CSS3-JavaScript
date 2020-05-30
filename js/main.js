@@ -67,7 +67,9 @@ const compoanyName = "specialCo",
     heading: document.querySelector(".landing-page .title"),
     parapraph: document.querySelector(".landing-page .description"),
     btn: document.querySelector(".intro .btn"),
-    colorsHolder: document.getElementById("colors-holder"),
+    colorsList: document.getElementById("colors-list"),
+    fontsList: document.getElementById("fonts-list"),
+    backgroundSpeed: document.getElementById("background-speed"),
 
     /**
      * Settings
@@ -77,6 +79,9 @@ const compoanyName = "specialCo",
   };
 let slide;
 let activeSlide = 0;
+let speed = 3;
+let font;
+let sliderInterval;
 
 function renderSlider() {
   const { landingPage, heading, parapraph, btn } = elements;
@@ -87,20 +92,47 @@ function renderSlider() {
   btn.innerHTML = slide.btn.title;
   btn.href = slide.btn.href;
 }
+
 function init() {
-  const { logo, settingBox, toggle, colorsHolder, landingPage } = elements;
+  const {
+    logo,
+    settingBox,
+    toggle,
+    colorsList,
+    fontsList,
+    landingPage,
+    backgroundSpeed,
+  } = elements;
   document.documentElement.style.setProperty("--main-color", colors[0]);
 
   logo.innerHTML = compoanyName;
   document.title = `${compoanyName} - ${tagline}`;
   renderSlider();
-  setInterval(() => {
+
+  /**
+   * Bind localsotage
+   */
+  speed = localStorage.getItem("speed") ? localStorage.getItem("speed") : speed;
+  font = localStorage.getItem("selected_font");
+
+  backgroundSpeed.value = speed;
+  sliderInterval = setInterval(() => {
     activeSlide++;
     if (activeSlide == sliders.length) {
       activeSlide = 0;
     }
     renderSlider();
-  }, 3000);
+  }, speed * 1000);
+
+  if (font) {
+    document.documentElement.style.setProperty("--font-family", font);
+
+    fontsList.querySelectorAll("option").forEach((item) => {
+      if (item.value == font) {
+        item.setAttribute("selected", "selected");
+      }
+    });
+  }
 
   toggle.onclick = function () {
     settingBox.classList.toggle("opened");
@@ -108,29 +140,71 @@ function init() {
   };
   landingPage.onclick = function () {
     settingBox.classList.remove("opened");
+    toggle.querySelector(".fa-gear").classList.remove("fa-spin");
+  };
+
+  backgroundSpeed.onchange = function (event) {
+    speed = event.target.value;
+
+    localStorage.setItem("speed", speed);
+
+    clearInterval(sliderInterval);
+
+    sliderInterval = setInterval(() => {
+      activeSlide++;
+      if (activeSlide == sliders.length) {
+        activeSlide = 0;
+      }
+      renderSlider();
+    }, speed * 1000);
+  };
+
+  fontsList.onchange = function (event) {
+    font = event.target.value;
+
+    localStorage.setItem("selected_font", font);
+
+    event.target.parentElement
+      .querySelectorAll('[selected="selected"]')
+      .forEach((item) => {
+        item.removeAttribute("selected", "selected");
+      });
+
+    event.target
+      .querySelector(`[value="${font}"]`)
+      .setAttribute("selected", "selected");
+
+    document.documentElement.style.setProperty("--font-family", font);
+    localStorage.setItem("selected_font", font);
   };
 
   for (let index = 0; index < colors.length; index++) {
     var color = document.createElement("LI");
     color.setAttribute("data-color", colors[index]);
     color.style.backgroundColor = colors[index];
-    colorsHolder.appendChild(color);
+    colorsList.appendChild(color);
 
     color.addEventListener("click", function (event) {
-      var siblings = this.parentNode.childNodes;
+      let color = event.target.dataset.color;
+      var siblings = event.target.parentElement.querySelectorAll(".active");
 
-      for (let index = 0; index < siblings.length; index++) {
-        siblings[index].classList.remove("selected");
-      }
-      siblings[index].classList.add("selected");
-      document.documentElement.style.setProperty(
-        "--main-color",
-        event.target.dataset.color
-      );
+      siblings.forEach((element) => {
+        element.classList.remove("active");
+      });
+
+      event.target.classList.add("active");
+      document.documentElement.style.setProperty("--main-color", color);
+      localStorage.setItem("selected_color", JSON.stringify({ color, index }));
     });
   }
-
-  colorsHolder.querySelectorAll("li")[0].classList.add("selected");
+  const selectedColor = localStorage.getItem("selected_color");
+  if (selectedColor) {
+    var obj = JSON.parse(selectedColor);
+    document.documentElement.style.setProperty("--main-color", obj.color);
+    colorsList.querySelectorAll("li")[obj.index].classList.add("active");
+  } else {
+    colorsList.querySelectorAll("li")[0].classList.add("active");
+  }
 }
 
 // *** Hide loader when everything is loaded *** //
