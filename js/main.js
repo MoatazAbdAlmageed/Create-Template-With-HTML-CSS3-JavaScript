@@ -69,6 +69,7 @@ const compoanyName = "specialCo",
     btn: document.querySelector(".intro .btn"),
     colorsList: document.getElementById("colors-list"),
     fontsList: document.getElementById("fonts-list"),
+    sizesList: document.getElementById("sizes-list"),
     backgroundSpeed: document.getElementById("background-speed"),
 
     /**
@@ -81,6 +82,7 @@ let slide;
 let activeSlide = 0;
 let speed = 3;
 let font;
+let size;
 let sliderInterval;
 
 function renderSlider() {
@@ -100,6 +102,7 @@ function init() {
     toggle,
     colorsList,
     fontsList,
+    sizesList,
     landingPage,
     backgroundSpeed,
   } = elements;
@@ -114,6 +117,7 @@ function init() {
    */
   speed = localStorage.getItem("speed") ? localStorage.getItem("speed") : speed;
   font = localStorage.getItem("selected_font");
+  size = localStorage.getItem("selected_size");
 
   backgroundSpeed.value = speed;
   sliderInterval = setInterval(() => {
@@ -129,6 +133,16 @@ function init() {
 
     fontsList.querySelectorAll("option").forEach((item) => {
       if (item.value == font) {
+        item.setAttribute("selected", "selected");
+      }
+    });
+  }
+
+  if (size) {
+    document.documentElement.style.setProperty("--font-size", size);
+
+    sizesList.querySelectorAll("option").forEach((item) => {
+      if (item.value == size) {
         item.setAttribute("selected", "selected");
       }
     });
@@ -176,6 +190,25 @@ function init() {
 
     document.documentElement.style.setProperty("--font-family", font);
     localStorage.setItem("selected_font", font);
+  };
+
+  sizesList.onchange = function (event) {
+    size = event.target.value;
+
+    localStorage.setItem("selected_size", size);
+
+    event.target.parentElement
+      .querySelectorAll('[selected="selected"]')
+      .forEach((item) => {
+        item.removeAttribute("selected", "selected");
+      });
+
+    event.target
+      .querySelector(`[value="${size}"]`)
+      .setAttribute("selected", "selected");
+
+    document.documentElement.style.setProperty("--font-size", size);
+    localStorage.setItem("selected_size", size);
   };
 
   for (let index = 0; index < colors.length; index++) {
