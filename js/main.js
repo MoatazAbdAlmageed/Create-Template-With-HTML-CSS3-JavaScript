@@ -101,7 +101,7 @@ function init() {
   }, 3000);
 
   pointer.onclick = function () {
-    settingBox.classList.add("opened");
+    settingBox.classList.toggle("opened");
   };
 
   for (let index = 0; index < colors.length; index++) {
