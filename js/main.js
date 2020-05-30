@@ -70,7 +70,7 @@ const compoanyName = "specialCo",
     colorsList: document.getElementById("colors-list"),
     fontsList: document.getElementById("fonts-list"),
     sizesList: document.getElementById("sizes-list"),
-    backgroundSpeed: document.getElementById("background-speed"),
+    slideSpeed: document.getElementById("slide-speed"),
 
     /**
      * Settings
@@ -104,7 +104,7 @@ function init() {
     fontsList,
     sizesList,
     landingPage,
-    backgroundSpeed,
+    slideSpeed,
   } = elements;
   document.documentElement.style.setProperty("--main-color", colors[0]);
 
@@ -119,7 +119,7 @@ function init() {
   font = localStorage.getItem("selected_font");
   size = localStorage.getItem("selected_size");
 
-  backgroundSpeed.value = speed;
+  slideSpeed.value = speed;
   sliderInterval = setInterval(() => {
     activeSlide++;
     if (activeSlide == sliders.length) {
@@ -157,7 +157,7 @@ function init() {
     toggle.querySelector(".fa-gear").classList.remove("fa-spin");
   };
 
-  backgroundSpeed.onchange = function (event) {
+  slideSpeed.onchange = function (event) {
     speed = event.target.value;
 
     localStorage.setItem("speed", speed);
